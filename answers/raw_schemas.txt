@@ -1,3 +1,16 @@
+SHOW TABLES;
+┌──────────────────────┐
+│         name         │
+│       varchar        │
+├──────────────────────┤
+│ bike_data            │
+│ central_park_weather │
+│ fhv_bases            │
+│ fhv_tripdata         │
+│ fhvhv_tripdata       │
+│ green_tripdata       │
+│ yellow_tripdata      │
+└──────────────────────┘
 DESCRIBE yellow_tripdata;
 ┌───────────────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
 │      column_name      │ column_type │  null   │   key   │ default │  extra  │

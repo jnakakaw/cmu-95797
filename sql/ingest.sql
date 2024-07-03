@@ -1,5 +1,6 @@
 .echo on
 .schema
+
 -- Import Tables
 create table yellow_tripdata as select * from
 read_parquet('./data/taxi/yellow_tripdata*.parquet',

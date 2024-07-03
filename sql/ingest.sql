@@ -15,8 +15,8 @@ create table fhv_tripdata as select * from
 read_parquet('./data/taxi/fhv_tripdata*.parquet',
 union_by_name=True, filename=True);
 create table fhv_bases as select * from
-read_csv('./data/fhv_bases.csv');
+read_csv('./data/fhv_bases.csv', union_by_name=True, filename=True, all_varchar=1, header=True);
 create table central_park_weather as select * from
-read_csv('./data/central_park_weather.csv');
+read_csv('./data/central_park_weather.csv', union_by_name=True, filename=True, all_varchar=1);
 create table bike_data as select * from
-read_csv('./data/citibike-tripdata.csv.gz');
+read_csv('./data/citibike-tripdata.csv.gz', union_by_name=True, filename=True, all_varchar=1);

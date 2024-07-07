@@ -1,7 +1,7 @@
 # cmu-95797-23m6
 
-## Week #2 Assignment
-## Name: Jinzo Nakakawa
+### Week #2 Assignment
+### Name: Jinzo Nakakawa
 
 Make sure you have duckdb and dbt installed in your enviroment
 

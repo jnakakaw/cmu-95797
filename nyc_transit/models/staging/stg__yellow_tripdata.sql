@@ -34,3 +34,4 @@ renamed as (
 select distinct * from renamed
 
 -- filename column was removed and it is reported here (./data/taxi/yellow_tripdata.parquet)
+-- ehail_fee column was removed, as all values are null

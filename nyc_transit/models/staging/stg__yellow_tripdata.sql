@@ -31,4 +31,6 @@ renamed as (
 
 )
 
-select * from renamed
+select distinct * from renamed
+
+-- filename column was removed and it is reported here (./data/taxi/yellow_tripdata.parquet)

@@ -7,14 +7,15 @@ with source as (
 renamed as (
 
     select
-        base_number,
+        base_number as base_id,
         base_name,
         dba,
-        dba_category,
-        --filename
+        dba_category
 
         from source
 
 )
 
-select * from renamed
+select distinct * from renamed
+
+-- filename column was removed and it is reported here (./data/fhv_bases.csv)

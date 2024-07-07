@@ -14,8 +14,8 @@ renamed_bike as (
         TRY_CAST("birth year" AS int) as birth_year,
         TRY_CAST(gender AS int) as gender,
         TRY_CAST(tripduration AS int) as trip_duration,
-        TRY_CAST(starttime AS date) as start_time,
-        TRY_CAST(stoptime AS date) as stop_time,
+        TRY_CAST(starttime AS datetime) as start_time,
+        TRY_CAST(stoptime AS datetime) as stop_time,
         TRY_CAST("start station id" AS int) as start_station_id,
         "start station name" as start_station_name,
         TRY_CAST("start station latitude" AS double) as start_station_latitude,
@@ -56,6 +56,8 @@ renamed_ride as (
 
 )
 
-select * from renamed_bike
+select distinct * from renamed_bike
 UNION
-select * from renamed_ride
+select distinct * from renamed_ride
+
+-- filename column was removed and it is reported here (./data/citibike-tripdata.csv.gz)

@@ -8,8 +8,8 @@ renamed as (
 
     select
         hvfhs_license_num,
-        dispatching_base_num,
-        originating_base_num,
+        dispatching_base_num as dispatching_base_id,
+        originating_base_num as originating_base_id,
         request_datetime,
         on_scene_datetime,
         pickup_datetime,
@@ -36,4 +36,6 @@ renamed as (
 
 )
 
-select * from renamed
+select distinct * from renamed
+
+-- filename column was removed and it is reported here (./data/taxi/fhvhv_tripdata.parquet)

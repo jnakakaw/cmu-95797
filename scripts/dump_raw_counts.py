@@ -13,7 +13,7 @@ def main():
     rows_list = []
 
     with duckdb.connect("main.db") as con:
-        # Tables are imported in a for loop
+        # Row count queries
         for table_name in raw_tables:
             rows = con.sql(f"SELECT COUNT(*) FROM {table_name}").fetchone()[0]
             rows_list.append(rows)

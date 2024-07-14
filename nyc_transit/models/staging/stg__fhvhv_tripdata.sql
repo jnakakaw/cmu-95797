@@ -38,5 +38,3 @@ renamed as (
 )
 
 select distinct * from renamed
-
--- filename column was removed and it is reported here (./data/taxi/fhvhv_tripdata.parquet)

@@ -2,172 +2,296 @@ sources:
   - name: main
     tables:
       - name: bike_data
+        description: "NYC citibike trip data"
         columns:
           - name: tripduration
+            description: "Trip Duration (seconds)"
             data_type: CHARACTER VARYING(256)
           - name: starttime
+            description: "Start Time and Date"
             data_type: CHARACTER VARYING(256)
           - name: stoptime
+            description: "Stop Time and Dat"
             data_type: CHARACTER VARYING(256)
           - name: start station id
+            description: "Start station ID"
             data_type: CHARACTER VARYING(256)
           - name: start station name
+            description: "Start station name"
             data_type: CHARACTER VARYING(256)
           - name: start station latitude
+            description: "Start station latitude"
             data_type: CHARACTER VARYING(256)
           - name: start station longitude
+            description: "Start station longitude"
             data_type: CHARACTER VARYING(256)
           - name: end station id
+            description: "End station ID"
             data_type: CHARACTER VARYING(256)
           - name: end station name
+            description: "End station name"
             data_type: CHARACTER VARYING(256)
           - name: end station latitude
+            description: "End station latitude"
             data_type: CHARACTER VARYING(256)
           - name: end station longitude
+            description: "End station longitude"
             data_type: CHARACTER VARYING(256)
           - name: bikeid
+            description: "bike id"
             data_type: CHARACTER VARYING(256)
           - name: usertype
+            description: "User Type (Customer = 24-hour pass or 3-day pass user; Subscriber = Annual Member)"
             data_type: CHARACTER VARYING(256)
           - name: birth year
+            description: "Year of Birth"
             data_type: CHARACTER VARYING(256)
           - name: gender
+            description: "Gender (Zero=unknown; 1=male; 2=female)"
             data_type: CHARACTER VARYING(256)
           - name: ride_id
+            description: "Ride id"
             data_type: CHARACTER VARYING(256)
           - name: rideable_type
+            description: "Rideable type"
             data_type: CHARACTER VARYING(256)
           - name: started_at
+            description: "Start Time and Date"
             data_type: CHARACTER VARYING(256)
           - name: ended_at
+            description: "End Time and Date"
             data_type: CHARACTER VARYING(256)
           - name: start_station_name
+            description: "Start station name"
             data_type: CHARACTER VARYING(256)
           - name: start_station_id
+            description: "Start station id"
             data_type: CHARACTER VARYING(256)
           - name: end_station_name
+            description: "End station name"
             data_type: CHARACTER VARYING(256)
           - name: end_station_id
+            description: "End station id"
             data_type: CHARACTER VARYING(256)
           - name: start_lat
+            description: "Start latitude"
             data_type: CHARACTER VARYING(256)
           - name: start_lng
+            description: "Start longitude"
             data_type: CHARACTER VARYING(256)
           - name: end_lat
+            description: "End latitude"
             data_type: CHARACTER VARYING(256)
           - name: end_lng
+            description: "Start longitude"
             data_type: CHARACTER VARYING(256)
           - name: member_casual
+            description: "Member or casual ride"
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: "File path for ingested raw data"
             data_type: CHARACTER VARYING(256)
 
       - name: central_park_weather
+        description: "GHCN (Global Historical Climatology Network)-Daily is a database that addresses the critical need for
+historical daily temperature, precipitation, and snow records over global land areas. GHCN-Daily is a
+composite of climate records from numerous sources that were merged and then subjected to a suite of
+quality assurance reviews. The archive includes over 40 meteorological elements (see Table 4 below for
+complete list) including temperature daily maximum/minimum, temperature at observation time,
+precipitation, snowfall, snow depth, evaporation, wind movement, wind maximums, soil temperature,
+cloudiness, and more."
         columns:
           - name: station
+            description: "(17 characters) is the station identification code"
             data_type: CHARACTER VARYING(256)
           - name: name
+            description: "(max 50 characters) is the name of the station (usually city/airport name). Optional
+output field"
             data_type: CHARACTER VARYING(256)
           - name: date
+            description: "is the year of the record (4 digits) followed by month (2 digits) and day (2 digits)"
             data_type: CHARACTER VARYING(256)
           - name: awnd
+            description: "Average daily wind speed (meters per second or miles per hour as per user preference)"
             data_type: CHARACTER VARYING(256)
           - name: prcp
+            description: "Precipitation (mm or inches as per user preference, inches to hundredths on Daily Form pdf file)"
             data_type: CHARACTER VARYING(256)
           - name: snow
+            description: Snowfall (mm or inches as per user preference, inches to tenths on Daily Form pdf file)"
             data_type: CHARACTER VARYING(256)
           - name: snwd
+            description: "Snow depth (mm or inches as per user preference, inches on Daily Form pdf file)"
             data_type: CHARACTER VARYING(256)
           - name: tmax
+            description: "Maximum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on
+Daily Form pdf file"
             data_type: CHARACTER VARYING(256)
           - name: tmin
+            description: "Minimum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on
+Daily Form pdf file"
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: "File path for ingested raw data"
             data_type: CHARACTER VARYING(256)
 
       - name: fhv_bases
+        description: "FHV bases in NYC"
         columns:
           - name: base_number
+            description: "The TLC license number of the dispatching base"
             data_type: CHARACTER VARYING(256)
           - name: base_name
+            description: "The official name of the base entity"
             data_type: CHARACTER VARYING(256)
           - name: dba
+            description: "The “doing business as” name of the base"
             data_type: CHARACTER VARYING(256)
           - name: dba_category
+            description: "“doing business as” category"
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: "File path for ingested raw data"
             data_type: CHARACTER VARYING(256)
 
       - name: fhv_tripdata
+        description: "FHV trip data. Each row represents a single trip in an FHV"
         columns:
           - name: dispatching_base_num
+            description: "The TLC Base License Number of the base that dispatched the trip"
             data_type: CHARACTER VARYING(256)
           - name: pickup_datetime
+            description: "The date and time of the trip pick-up"
             data_type: TIMESTAMP
           - name: dropoff_datetime
+            description: "The date and time of the trip dropoff"
             data_type: TIMESTAMP
           - name: pulocationid
+            description: "TLC Taxi Zone in which the trip began"
             data_type: DOUBLE
           - name: dolocationid
+            description: "TLC Taxi Zone in which the trip ended"
             data_type: DOUBLE
           - name: sr_flag
+            description: "Indicates if the trip was a part of a shared ride chain offered by a
+High Volume FHV company (e.g. Uber Pool, Lyft Line). For shared
+trips, the value is 1. For non-shared rides, this field is null."
             data_type: INTEGER
           - name: affiliated_base_number
+            description: ""
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: "File path for ingested raw data"
             data_type: CHARACTER VARYING(256)
 
       - name: fhvhv_tripdata
+        description: "High Volume FHV trip data. Each row represents a single trip in an FHV
+dispatched by one of NYC’s licensed High Volume FHV bases. On August 14, 2018, Mayor de Blasio
+signed Local Law 149 of 2018, creating a new license category for TLC-licensed FHV businesses that
+currently dispatch or plan to dispatch more than 10,000 FHV trips in New York City per day under a
+single brand, trade, or operating name, referred to as High-Volume For-Hire Services (HVFHS). This law
+went into effect on Feb 1, 2019."
         columns:
           - name: hvfhs_license_num
+            description: "The TLC license number of the HVFHS base or business
+As of September 2019, the HVFHS licensees are the following:
+• HV0002: Juno
+• HV0003: Uber
+• HV0004: Via
+• HV0005: Lyft"
             data_type: CHARACTER VARYING(256)
           - name: dispatching_base_num
+            description: "The TLC Base License Number of the base that dispatched the trip"
             data_type: CHARACTER VARYING(256)
           - name: originating_base_num
+            description: "base number of the base that received the original trip request"
             data_type: CHARACTER VARYING(256)
           - name: request_datetime
+            description: "date/time when passenger requested to be picked up"
             data_type: TIMESTAMP
           - name: on_scene_datetime
+            description: "date/time when driver arrived at the pick-up location (Accessible
+Vehicles-only)"
             data_type: TIMESTAMP
           - name: pickup_datetime
+            description: "The date and time of the trip pick-up"
             data_type: TIMESTAMP
+            tests:
+              - not_null
+              - dbt_expectations.expect_column_to_exist
           - name: dropoff_datetime
+            description: "The date and time of the trip drop-off"
             data_type: TIMESTAMP
           - name: pulocationid
+            description: "TLC Taxi Zone in which the trip began"
             data_type: BIGINT
           - name: dolocationid
+            description: "TLC Taxi Zone in which the trip ended"
             data_type: BIGINT
           - name: trip_miles
+            description: "total miles for passenger trip"
             data_type: DOUBLE
           - name: trip_time
+            description: "total time in seconds for passenger trip"
             data_type: BIGINT
+            tests:
+              - dbt_expectations.expect_column_values_to_be_between:
+                  min_value: 0
+                  max_value: 10000
+                  config:
+                    severity: warn
           - name: base_passenger_fare
+            description: "base passenger fare before tolls, tips, taxes, and fees"
             data_type: DOUBLE
           - name: tolls
+            description: "total amount of all tolls paid in trip"
             data_type: DOUBLE
           - name: bcf
+            description: "total amount collected in trip for Black Car Fund"
             data_type: DOUBLE
           - name: sales_tax
+            description: "total amount collected in trip for NYS sales tax"
             data_type: DOUBLE
           - name: congestion_surcharge
+            description: "total amount collected in trip for NYS congestion surcharge"
             data_type: DOUBLE
           - name: airport_fee
+            description: "$2.50 for both drop off and pick up at LaGuardia, Newark, and John
+F. Kennedy airports"
             data_type: DOUBLE
           - name: tips
+            description: "total amount of tips received from passenger"
             data_type: DOUBLE
           - name: driver_pay
+            description: "total driver pay (not including tolls or tips and net of commission,
+surcharges, or taxes)"
             data_type: DOUBLE
           - name: shared_request_flag
+            description: "Did the passenger agree to a shared/pooled ride, regardless of
+whether they were matched? (Y/N)"
             data_type: CHARACTER VARYING(256)
           - name: shared_match_flag
+            description: "Did the passenger share the vehicle with another passenger who
+booked separately at any point during the trip? (Y/N)"
             data_type: CHARACTER VARYING(256)
           - name: access_a_ride_flag
+            description: "Was the trip administered on behalf of the Metropolitan
+Transportation Authority (MTA)? (Y/N)"
             data_type: CHARACTER VARYING(256)
+            tests:
+              - accepted_values:
+                  values: ['Y', 'N']
+                  config:
+                    severity: warn
           - name: wav_request_flag
+            description: "Did the passenger request a wheelchair-accessible vehicle (WAV)?
+(Y/N)"
             data_type: CHARACTER VARYING(256)
           - name: wav_match_flag
+            description: "Did the trip occur in a wheelchair-accessible vehicle (WAV)? (Y/N)"
             data_type: CHARACTER VARYING(256)
           - name: filename
+            description: "File path for ingested raw data"
             data_type: CHARACTER VARYING(256)
 
       - name: green_tripdata

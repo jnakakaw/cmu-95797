@@ -13,9 +13,9 @@ renamed_bike as (
         usertype as user_type,
         TRY_CAST("birth year" AS int) as birth_year,
         TRY_CAST(gender AS int) as gender,
-        TRY_CAST(tripduration AS int) as trip_duration,
         TRY_CAST(starttime AS datetime) as start_time,
         TRY_CAST(stoptime AS datetime) as stop_time,
+        TRY_CAST(datediff('second', start_time, stop_time) AS int) as trip_duration,
         TRY_CAST("start station id" AS int) as start_station_id,
         "start station name" as start_station_name,
         TRY_CAST("start station latitude" AS double) as start_station_latitude,
@@ -27,7 +27,8 @@ renamed_bike as (
         filename
 
         from source
-        where bikeid is not null
+        -- drop rows with null bike_id and trip times less than 0 and greater than 8 hours
+        where bikeid is not null and trip_duration >= 0 and trip_duration <= 28800 
 
 ),
 
@@ -40,9 +41,9 @@ renamed_ride as (
         member_casual as user_type,
         TRY_CAST("birth year" AS int) as birth_year,
         TRY_CAST(gender AS int) as gender,
-        TRY_CAST(tripduration AS int) as trip_duration,
         TRY_CAST(started_at AS date) as start_time,
         TRY_CAST(ended_at AS date) as stop_time,
+        TRY_CAST(datediff('second', start_time, stop_time) AS int) as trip_duration,
         -- intermediate points removed from station ids
         TRY_CAST(REPLACE(start_station_id, '.', '') AS int) as start_station_id,
         start_station_name,
@@ -56,7 +57,8 @@ renamed_ride as (
         filename
 
         from source
-        where ride_id is not null
+        -- drop rows with null ride_id and trip times less than 0 and greater than 8 hours
+        where ride_id is not null and trip_duration >= 0 and trip_duration <= 28800 
 
 )
 

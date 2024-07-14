@@ -5,10 +5,14 @@ models:
       - name: bike_id
         data_type: integer
         description: "bike id"
+        tests:
+          - dbt_expectations.expect_column_to_exist # column must exist
 
       - name: ride_id
         data_type: varchar
         description: "Ride id"
+        tests:
+          - dbt_expectations.expect_column_to_exist # column must exist
 
       - name: rideable_type
         data_type: varchar
@@ -30,35 +34,35 @@ models:
         data_type: integer
         description: "Trip Duration (seconds)"
         tests:
-          - dbt_expectations.expect_column_values_to_be_between:
+          - dbt_expectations.expect_column_to_exist # column must exist
+          # trip duration is expected to be between 0 and 28800 seconds
+          - dbt_expectations.expect_column_values_to_be_between: 
               min_value: 0
-              max_value: 100000
-              config:
-                severity: warn
+              max_value: 28800 # 8 hours in seconds
 
       - name: start_time
         data_type: timestamp
         description: "Start Time and Date"
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
+          - not_null # start time cannot be null
+          - dbt_expectations.expect_column_to_exist # start time column must exist
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: timestamp
+              column_type: timestamp # this must be an actual datestamp
 
       - name: stop_time
         data_type: timestamp
         description: "Stop Time and Date"
         tests:
-          - not_null
-          - dbt_expectations.expect_column_to_exist
+          - not_null # stop time cannot be null
+          - dbt_expectations.expect_column_to_exist # stop time column must exist
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: timestamp
+              column_type: timestamp # this must be an actual datestamp
 
       - name: start_station_id
         data_type: integer
         description: "Start station ID"
         tests:
-          - dbt_expectations.expect_column_to_exist
+          - dbt_expectations.expect_column_to_exist # column must exist
 
       - name: start_station_name
         data_type: varchar
@@ -76,7 +80,7 @@ models:
         data_type: integer
         description: "End station ID"
         tests:
-          - dbt_expectations.expect_column_to_exist
+          - dbt_expectations.expect_column_to_exist # column must exist
 
       - name: end_station_name
         data_type: varchar
@@ -106,11 +110,17 @@ cloudiness, and more"
       - name: measurement_date
         data_type: date
         description: "is the year of the record (4 digits) followed by month (2 digits) and day (2 digits)"
+        tests:
+          - unique # there should be only one measurement for each day
+          - not_null # having an actual value is mandatory
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: date # this value should be an actual date
 
       - name: avg_wind_speed
         data_type: double
         description: "Average daily wind speed (meters per second or miles per hour as per user preference)"
         tests:
+          # average wind speed should not be negative and should be less than 1000 m/s
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
               max_value: 1000
@@ -121,9 +131,10 @@ cloudiness, and more"
         data_type: double
         description: "Precipitation (mm or inches as per user preference, inches to hundredths on Daily Form pdf file)"
         tests:
+          # precipitation should not be negative and should be less than 1000 mm or inches
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
-              max_value: 100
+              max_value: 1000
               config:
                 severity: warn
 
@@ -131,9 +142,10 @@ cloudiness, and more"
         data_type: double
         description: "Snowfall (mm or inches as per user preference, inches to tenths on Daily Form pdf file)"
         tests:
+          # Snowfall should not be negative and should be less than 1000 mm or inches
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
-              max_value: 100
+              max_value: 1000
               config:
                 severity: warn
 
@@ -142,6 +154,7 @@ cloudiness, and more"
         description: "Maximum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on
 Daily Form pdf file"
         tests:
+          # temperature should greater or equal to -20F should be less than 120F
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: -20
               max_value: 120
@@ -153,6 +166,7 @@ Daily Form pdf file"
         description: "Minimum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on
 Daily Form pdf file"
         tests:
+        # temperature should greater or equal to -20F should be less than 120F
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: -20
               max_value: 120
@@ -169,10 +183,12 @@ Daily Form pdf file"
       - name: base_id
         data_type: varchar
         description: "The TLC license number of the dispatching base"
-        tests: # tests to constrain a primary key 
+        tests: 
+          # tests needed to constrain this field as primary key 
           - dbt_expectations.expect_column_to_exist
           - not_null
           - unique
+
       - name: base_name
         data_type: varchar
         description: "The official name of the base entity"
@@ -196,6 +212,7 @@ Daily Form pdf file"
         data_type: varchar
         description: "The TLC Base License Number of the base that dispatched the trip"
         tests:
+          # each value in this field should match a base_id in stg__fhv_bases table
           - relationships:
               to: ref('stg__fhv_bases')
               field: base_id
@@ -222,6 +239,7 @@ Daily Form pdf file"
         data_type: varchar
         description: ""
         tests:
+          # each value in this field should match a base_id in stg__fhv_bases table
           - relationships:
               to: ref('stg__fhv_bases')
               field: base_id
@@ -289,6 +307,11 @@ Vehicles-only)"
       - name: trip_time
         data_type: bigint
         description: "total time in seconds for passenger trip"
+        tests:
+          # trip time is expected to be greater or equal to zero and less than 43200 seconds
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 43200 # equivalent to 12 hours in seconds
 
       - name: base_passenger_fare
         data_type: double
@@ -329,44 +352,44 @@ surcharges, or taxes)"
         description: "Did the passenger agree to a shared/pooled ride, regardless of
 whether they were matched? (True/False)"
         tests:
+          # data type for this field should be bool
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: bool
-              config:
-                    severity: warn
+              column_type: boolean
 
       - name: shared_match
         data_type: boolean
         description: "Did the passenger share the vehicle with another passenger who
 booked separately at any point during the trip? (True/False)"
+        tests:
+          # data type for this field should be bool
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: boolean
 
       - name: metro_transportation
         data_type: boolean
         description: "Was the trip administered on behalf of the Metropolitan
 Transportation Authority (MTA)? (True/False)"
         tests:
+          # data type for this field should be bool
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: bool
-              config:
-                    severity: warn
+              column_type: boolean
 
       - name: wheelchair_accesible_request
         data_type: boolean
         description: "Did the passenger request a wheelchair-accessible vehicle (WAV)?
 (True/False)"
         tests:
+          # data type for this field should be bool
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: bool
-              config:
-                    severity: warn
+              column_type: boolean
 
       - name: wheelchair_accesible_match
         data_type: boolean
         description: "Did the trip occur in a wheelchair-accessible vehicle (WAV)? (True/False)"
         tests:
+          # data type for this field should be bool
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: bool
-              config:
-                    severity: warn
+              column_type: boolean
 
       - name: filename
         data_type: varchar

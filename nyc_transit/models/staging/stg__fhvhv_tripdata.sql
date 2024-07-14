@@ -34,6 +34,7 @@ renamed as (
         filename
 
         from source
+            WHERE trip_time >= 0 and trip_time < 28800 -- drop negative trip_time and trips longer than 8 hours
 
 )
 

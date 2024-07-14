@@ -42,6 +42,10 @@ sources:
             data_type: CHARACTER VARYING(256)
           - name: usertype
             description: "User Type (Customer = 24-hour pass or 3-day pass user; Subscriber = Annual Member)"
+            tests:
+              # test to evaluate that the values for this field are either subscriber or customer
+              - accepted_values: 
+                  values: ['Subscriber', 'Customer']            
             data_type: CHARACTER VARYING(256)
           - name: birth year
             description: "Year of Birth"
@@ -88,6 +92,10 @@ sources:
           - name: member_casual
             description: "Member or casual ride"
             data_type: CHARACTER VARYING(256)
+            tests:
+              - accepted_values:
+                  # test to evaluate that the values for this field are either casual or member
+                  values: ['casual', 'member'] 
           - name: filename
             description: "File path for ingested raw data"
             data_type: CHARACTER VARYING(256)
@@ -208,6 +216,9 @@ As of September 2019, the HVFHS licensees are the following:
           - name: dispatching_base_num
             description: "The TLC Base License Number of the base that dispatched the trip"
             data_type: CHARACTER VARYING(256)
+            tests:
+              - not_null # values in this field shoul not be nulls
+              - dbt_expectations.expect_column_to_exist # this field must exist
           - name: originating_base_num
             description: "base number of the base that received the original trip request"
             data_type: CHARACTER VARYING(256)
@@ -222,8 +233,8 @@ Vehicles-only)"
             description: "The date and time of the trip pick-up"
             data_type: TIMESTAMP
             tests:
-              - not_null
-              - dbt_expectations.expect_column_to_exist
+              - not_null # values in this field shoul not be nulls
+              - dbt_expectations.expect_column_to_exist # this field must exist
           - name: dropoff_datetime
             description: "The date and time of the trip drop-off"
             data_type: TIMESTAMP
@@ -240,11 +251,12 @@ Vehicles-only)"
             description: "total time in seconds for passenger trip"
             data_type: BIGINT
             tests:
+              # trip time is expected to be greater or equal to zero and less than 43200 seconds
               - dbt_expectations.expect_column_values_to_be_between:
                   min_value: 0
-                  max_value: 10000
+                  max_value: 43200 # equivalent to 12 hours in seconds
                   config:
-                    severity: warn
+                        severity: warn
           - name: base_passenger_fare
             description: "base passenger fare before tolls, tips, taxes, and fees"
             data_type: DOUBLE
@@ -275,14 +287,30 @@ surcharges, or taxes)"
             description: "Did the passenger agree to a shared/pooled ride, regardless of
 whether they were matched? (Y/N)"
             data_type: CHARACTER VARYING(256)
+            # tests if values in this column are either "Y" or "N"
+            # warning message is raised if not
+            tests:
+              - accepted_values:
+                  values: ['Y', 'N']
+                  config:
+                    severity: warn
           - name: shared_match_flag
             description: "Did the passenger share the vehicle with another passenger who
 booked separately at any point during the trip? (Y/N)"
             data_type: CHARACTER VARYING(256)
+            # tests if values in this column are either "Y" or "N"
+            # warning message is raised if not
+            tests:
+              - accepted_values:
+                  values: ['Y', 'N']
+                  config:
+                    severity: warn
           - name: access_a_ride_flag
             description: "Was the trip administered on behalf of the Metropolitan
 Transportation Authority (MTA)? (Y/N)"
             data_type: CHARACTER VARYING(256)
+            # tests if values in this column are either "Y" or "N"
+            # warning message is raised if not
             tests:
               - accepted_values:
                   values: ['Y', 'N']
@@ -292,9 +320,23 @@ Transportation Authority (MTA)? (Y/N)"
             description: "Did the passenger request a wheelchair-accessible vehicle (WAV)?
 (Y/N)"
             data_type: CHARACTER VARYING(256)
+            # tests if values in this column are either "Y" or "N"
+            # warning message is raised if not
+            tests:
+              - accepted_values:
+                  values: ['Y', 'N']
+                  config:
+                    severity: warn
           - name: wav_match_flag
             description: "Did the trip occur in a wheelchair-accessible vehicle (WAV)? (Y/N)"
             data_type: CHARACTER VARYING(256)
+            # tests if values in this column are either "Y" or "N"
+            # warning message is raised if not
+            tests:
+              - accepted_values:
+                  values: ['Y', 'N']
+                  config:
+                    severity: warn
           - name: filename
             description: "File path for ingested raw data"
             data_type: CHARACTER VARYING(256)

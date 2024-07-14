@@ -10,7 +10,7 @@ renamed as (
         VendorID as vendor_id,
         lpep_pickup_datetime as pickup_datetime,
         lpep_dropoff_datetime as dropoff_datetime,
-        store_and_fwd_flag as store_and_fwd,
+        {{ flag_to_bool("store_and_fwd_flag") }} as store_and_fwd,
         RatecodeID as ratecode_id,
         PULocationID as pickup_location_id,
         DOLocationID as dropoff_location_id,
@@ -25,9 +25,12 @@ renamed as (
         total_amount,
         payment_type,
         trip_type,
-        congestion_surcharge
+        congestion_surcharge,
+        filename
 
         from source
+            WHERE lpep_pickup_datetime < TIMESTAMP '2022-12-31' -- drop rows in the future
+                AND trip_distance >= 0 -- drop negative trip_distance
 
 )
 

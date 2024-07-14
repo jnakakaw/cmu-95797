@@ -23,7 +23,8 @@ renamed_bike as (
         TRY_CAST("end station id" AS int) as end_station_id,
         "end station name" as end_station_name,
         TRY_CAST("end station latitude" AS double) as end_station_latitude,
-        TRY_CAST("end station longitude" AS double) as end_station_longitude
+        TRY_CAST("end station longitude" AS double) as end_station_longitude,
+        filename
 
         from source
         where bikeid is not null
@@ -42,22 +43,24 @@ renamed_ride as (
         TRY_CAST(tripduration AS int) as trip_duration,
         TRY_CAST(started_at AS date) as start_time,
         TRY_CAST(ended_at AS date) as stop_time,
+        -- intermediate points removed from station ids
         TRY_CAST(REPLACE(start_station_id, '.', '') AS int) as start_station_id,
         start_station_name,
         TRY_CAST(start_lat AS double) as start_station_latitude,
         TRY_CAST(start_lng AS double) as start_station_longitude,
+        -- intermediate points removed from station ids
         TRY_CAST(REPLACE(end_station_id, '.', '') AS int) as end_station_id,
         end_station_name,
         TRY_CAST(end_lat AS double) as end_station_latitude,
-        TRY_CAST(end_lng AS double) as end_station_longitude
+        TRY_CAST(end_lng AS double) as end_station_longitude,
+        filename
 
         from source
         where ride_id is not null
 
 )
 
+-- new and old bike ride tables are unioned
 select distinct * from renamed_bike
 UNION
 select distinct * from renamed_ride
-
--- filename column was removed and it is reported here (./data/citibike-tripdata.csv.gz)

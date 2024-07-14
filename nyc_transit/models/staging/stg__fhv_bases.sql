@@ -7,15 +7,14 @@ with source as (
 renamed as (
 
     select
-        base_number as base_id,
+        {{ clean_base_ids("base_number") }} as base_id,
         base_name,
         dba,
-        dba_category
+        dba_category,
+        filename
 
         from source
 
 )
 
 select distinct * from renamed
-
--- filename column was removed and it is reported here (./data/fhv_bases.csv)

@@ -13,7 +13,7 @@ renamed as (
         passenger_count,
         trip_distance,
         RatecodeID as ratecode_id,
-        store_and_fwd_flag as store_and_fwd,
+        {{flag_to_bool("store_and_fwd_flag")}} as store_and_fwd,
         PULocationID as pickup_location_id,
         DOLocationID as dropoff_location_id,
         payment_type,
@@ -25,9 +25,12 @@ renamed as (
         improvement_surcharge,
         total_amount,
         congestion_surcharge,
-        airport_fee as airport_charges
+        airport_fee as airport_charges,
+        filename
 
         from source
+            WHERE tpep_pickup_datetime < TIMESTAMP '2022-12-31' -- drop rows in the future
+                AND trip_distance >= 0 -- drop negative trip_distance
 
 )
 

@@ -26,11 +26,12 @@ renamed as (
         airport_fee,
         tips as tip_charges,
         driver_pay,
-        shared_request_flag as shared_request,
-        shared_match_flag as shared_match,
-        access_a_ride_flag as metro_transportation,
-        wav_request_flag as wheelchair_accesible_request,
-        wav_match_flag as wheelchair_accesible_match
+        {{ flag_to_bool("shared_request_flag") }} as shared_request,
+        {{ flag_to_bool("shared_match_flag") }} as shared_match,
+        {{ flag_to_bool("access_a_ride_flag") }} as metro_transportation,
+        {{ flag_to_bool("wav_request_flag") }} as wheelchair_accesible_request,
+        {{ flag_to_bool("wav_match_flag") }} as wheelchair_accesible_match,
+        filename
 
         from source
 

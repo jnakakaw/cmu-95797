@@ -13,6 +13,7 @@ renamed as (
         TRY_CAST(snow AS double) as snow,
         TRY_CAST(tmax AS int) as max_temp,
         TRY_CAST(tmin AS int) as min_temp,
+        filename
 
         from source
 

@@ -1,38 +1,44 @@
 models:
   - name: stg__bike_data
-    description: ""
+    description: "Cleaned NYC citibike trip data"
     columns:
       - name: bike_id
         data_type: integer
-        description: ""
+        description: "bike id"
 
       - name: ride_id
         data_type: varchar
-        description: ""
+        description: "Ride id"
 
       - name: rideable_type
         data_type: varchar
-        description: ""
+        description: "Rideable type"
 
       - name: user_type
         data_type: varchar
-        description: ""
+        description: "User Type (Customer = 24-hour pass or 3-day pass user; Subscriber = Annual Member)"
 
       - name: birth_year
         data_type: integer
-        description: ""
+        description: "Year of Birth"
 
       - name: gender
         data_type: integer
-        description: ""
+        description: "Gender (Zero=unknown; 1=male; 2=female)"
 
       - name: trip_duration
         data_type: integer
-        description: ""
+        description: "Trip Duration (seconds)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100000
+              config:
+                severity: warn
 
       - name: start_time
         data_type: timestamp
-        description: ""
+        description: "Start Time and Date"
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
@@ -41,104 +47,154 @@ models:
 
       - name: stop_time
         data_type: timestamp
-        description: ""
+        description: "Stop Time and Date"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: timestamp
 
       - name: start_station_id
         data_type: integer
-        description: ""
+        description: "Start station ID"
+        tests:
+          - dbt_expectations.expect_column_to_exist
 
       - name: start_station_name
         data_type: varchar
-        description: ""
+        description: "Start station name"
 
       - name: start_station_latitude
         data_type: double
-        description: ""
+        description: "Start station latitude"
 
       - name: start_station_longitude
         data_type: double
-        description: ""
+        description: "Start station longitude"
 
       - name: end_station_id
         data_type: integer
-        description: ""
+        description: "End station ID"
+        tests:
+          - dbt_expectations.expect_column_to_exist
 
       - name: end_station_name
         data_type: varchar
-        description: ""
+        description: "End station name"
 
       - name: end_station_latitude
         data_type: double
-        description: ""
+        description: "End station latitude"
 
       - name: end_station_longitude
         data_type: double
-        description: ""
+        description: "End station longitude"
 
       - name: filename
         data_type: varchar
-        description: ""
+        description: "File path for ingested raw data"
 
   - name: stg__central_park_weather
-    description: ""
+    description: "Cleaned GHCN (Global Historical Climatology Network) database that addresses the critical need for
+historical daily temperature, precipitation, and snow records over global land areas. GHCN-Daily is a
+composite of climate records from numerous sources that were merged and then subjected to a suite of
+quality assurance reviews. The archive includes over 40 meteorological elements (see Table 4 below for
+complete list) including temperature daily maximum/minimum, temperature at observation time,
+precipitation, snowfall, snow depth, evaporation, wind movement, wind maximums, soil temperature,
+cloudiness, and more"
     columns:
       - name: measurement_date
         data_type: date
-        description: ""
+        description: "is the year of the record (4 digits) followed by month (2 digits) and day (2 digits)"
 
       - name: avg_wind_speed
         data_type: double
-        description: ""
+        description: "Average daily wind speed (meters per second or miles per hour as per user preference)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1000
+              config:
+                severity: warn
 
       - name: precipitation
         data_type: double
-        description: ""
+        description: "Precipitation (mm or inches as per user preference, inches to hundredths on Daily Form pdf file)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100
+              config:
+                severity: warn
 
       - name: snow
         data_type: double
-        description: ""
+        description: "Snowfall (mm or inches as per user preference, inches to tenths on Daily Form pdf file)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100
+              config:
+                severity: warn
 
       - name: max_temp
         data_type: integer
-        description: ""
+        description: "Maximum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on
+Daily Form pdf file"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -20
+              max_value: 120
+              config:
+                severity: warn
 
       - name: min_temp
         data_type: integer
-        description: ""
+        description: "Minimum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on
+Daily Form pdf file"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -20
+              max_value: 120
+              config:
+                severity: warn
 
       - name: filename
         data_type: varchar
-        description: ""
+        description: "File path for ingested raw data"
 
   - name: stg__fhv_bases
-    description: ""
+    description: "Cleaned FHV bases in NYC"
     columns:
       - name: base_id
         data_type: varchar
-        description: ""
-
+        description: "The TLC license number of the dispatching base"
+        tests: # tests to constrain a primary key 
+          - dbt_expectations.expect_column_to_exist
+          - not_null
+          - unique
       - name: base_name
         data_type: varchar
-        description: ""
+        description: "The official name of the base entity"
 
       - name: dba
         data_type: varchar
-        description: ""
+        description: "The “doing business as” name of the base"
 
       - name: dba_category
         data_type: varchar
-        description: ""
+        description: "“doing business as” category"
 
       - name: filename
         data_type: varchar
-        description: ""
+        description: "File path for ingested raw data"
 
   - name: stg__fhv_tripdata
-    description: ""
+    description: "Cleaned FHV trip data. Each row represents a single trip in an FHV"
     columns:
       - name: dispatching_base_id
         data_type: varchar
-        description: ""
+        description: "The TLC Base License Number of the base that dispatched the trip"
         tests:
           - relationships:
               to: ref('stg__fhv_bases')
@@ -148,19 +204,19 @@ models:
 
       - name: pickup_datetime
         data_type: timestamp
-        description: ""
+        description: "The date and time of the trip pick-up"
 
       - name: dropoff_datetime
         data_type: timestamp
-        description: ""
+        description: "The date and time of the trip dropoff"
 
       - name: pickup_location_id
         data_type: double
-        description: ""
+        description: "TLC Taxi Zone in which the trip began"
 
       - name: dropoff_location_id
         data_type: double
-        description: ""
+        description: "TLC Taxi Zone in which the trip ended"
 
       - name: affiliated_base_id
         data_type: varchar
@@ -174,98 +230,119 @@ models:
 
       - name: filename
         data_type: varchar
-        description: ""
+        description: "File path for ingested raw data"
 
   - name: stg__fhvhv_tripdata
-    description: ""
+    description: "High Volume FHV trip data. Each row represents a single trip in an FHV
+dispatched by one of NYC’s licensed High Volume FHV bases. On August 14, 2018, Mayor de Blasio
+signed Local Law 149 of 2018, creating a new license category for TLC-licensed FHV businesses that
+currently dispatch or plan to dispatch more than 10,000 FHV trips in New York City per day under a
+single brand, trade, or operating name, referred to as High-Volume For-Hire Services (HVFHS). This law
+went into effect on Feb 1, 2019"
     columns:
       - name: hvfhs_license_num
         data_type: varchar
-        description: ""
+        description: "The TLC license number of the HVFHS base or business
+As of September 2019, the HVFHS licensees are the following:
+• HV0002: Juno
+• HV0003: Uber
+• HV0004: Via
+• HV0005: Lyft"
 
       - name: dispatching_base_id
         data_type: varchar
-        description: ""
+        description: "The TLC Base License Number of the base that dispatched the trip"
 
       - name: originating_base_id
         data_type: varchar
-        description: ""
+        description: "base number of the base that received the original trip request"
 
       - name: request_datetime
         data_type: timestamp
-        description: ""
+        description: "date/time when passenger requested to be picked up"
 
       - name: on_scene_datetime
         data_type: timestamp
-        description: ""
+        description: "date/time when driver arrived at the pick-up location (Accessible
+Vehicles-only)"
 
       - name: pickup_datetime
         data_type: timestamp
-        description: ""
+        description: "The date and time of the trip pick-up"
 
       - name: dropoff_datetime
         data_type: timestamp
-        description: ""
+        description: The date and time of the trip drop-off""
 
       - name: pickup_location_id
         data_type: bigint
-        description: ""
+        description: "TLC Taxi Zone in which the trip began"
 
       - name: dropoff_location_id
         data_type: bigint
-        description: ""
+        description: "TLC Taxi Zone in which the trip ended"
 
       - name: trip_miles
         data_type: double
-        description: ""
+        description: "total miles for passenger trip"
 
       - name: trip_time
         data_type: bigint
-        description: ""
+        description: "total time in seconds for passenger trip"
 
       - name: base_passenger_fare
         data_type: double
-        description: ""
+        description: "base passenger fare before tolls, tips, taxes, and fees"
 
       - name: toll_charges
         data_type: double
-        description: ""
+        description: "total amount of all tolls paid in trip"
 
       - name: black_card_funds
         data_type: double
-        description: ""
+        description: "total amount collected in trip for Black Car Fund"
 
       - name: sales_tax
         data_type: double
-        description: ""
+        description: "total amount collected in trip for NYS sales tax"
 
       - name: congestion_surcharge
         data_type: double
-        description: ""
+        description: "total amount collected in trip for NYS congestion surcharge"
 
       - name: airport_fee
         data_type: double
-        description: ""
+        description: "$2.50 for both drop off and pick up at LaGuardia, Newark, and John
+F. Kennedy airports"
 
       - name: tip_charges
         data_type: double
-        description: ""
+        description: "total amount of tips received from passenger"
 
       - name: driver_pay
         data_type: double
-        description: ""
+        description: "total driver pay (not including tolls or tips and net of commission,
+surcharges, or taxes)"
 
       - name: shared_request
         data_type: boolean
-        description: ""
+        description: "Did the passenger agree to a shared/pooled ride, regardless of
+whether they were matched? (True/False)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: bool
+              config:
+                    severity: warn
 
       - name: shared_match
         data_type: boolean
-        description: ""
+        description: "Did the passenger share the vehicle with another passenger who
+booked separately at any point during the trip? (True/False)"
 
       - name: metro_transportation
         data_type: boolean
-        description: ""
+        description: "Was the trip administered on behalf of the Metropolitan
+Transportation Authority (MTA)? (True/False)"
         tests:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: bool
@@ -274,15 +351,26 @@ models:
 
       - name: wheelchair_accesible_request
         data_type: boolean
-        description: ""
+        description: "Did the passenger request a wheelchair-accessible vehicle (WAV)?
+(True/False)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: bool
+              config:
+                    severity: warn
 
       - name: wheelchair_accesible_match
         data_type: boolean
-        description: ""
+        description: "Did the trip occur in a wheelchair-accessible vehicle (WAV)? (True/False)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: bool
+              config:
+                    severity: warn
 
       - name: filename
         data_type: varchar
-        description: ""
+        description: "File path for ingested raw data"
 
   - name: stg__green_tripdata
     description: ""

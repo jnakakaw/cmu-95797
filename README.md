@@ -1,6 +1,6 @@
 # cmu-95797-23m6
 
-### Week #2 Assignment
+### Week #3 Assignment
 ### Name: Jinzo Nakakawa
 
 Make sure you have duckdb and dbt installed in your enviroment
@@ -11,4 +11,6 @@ Steps to follow, run the following commands in terminal, make sure CMU-95797 is 
 2. duckdb main.db -s ".read ./sql/dump_raw_schemas.sql"
 3. python scripts/dump_raw_counts.py
 4. cd nyc_transit
-5. dbt run
+5. dbt build
+6. dbt docs generate
+7. dbt docs serve 

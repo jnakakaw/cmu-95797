@@ -1,3 +1,4 @@
+-- taxi trips table joined to taxi locations to filter by service zones
 select
     count(*) as total_trips_ending_at_airport
 from {{ ref('mart__fact_all_taxi_trips') }}

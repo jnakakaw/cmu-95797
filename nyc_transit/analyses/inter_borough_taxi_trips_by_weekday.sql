@@ -1,3 +1,5 @@
+-- join method
+-- for the total trip count, rows with null pu and do location ids were dropped
 with all_trips as
 (
 select

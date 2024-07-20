@@ -1,3 +1,5 @@
+-- count of total bike trips and total trip time (seconds) by weekday
+-- weekday day is taken from bike trip start date and time
 select
     weekday(started_at_ts) as weekday,
     count(*) as total_trips,

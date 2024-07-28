@@ -1,0 +1,269 @@
+┌───────────────┬───────────────────────────────────────────────┬──────────────────────────┐
+│    borough    │                     zone                      │ avg_time_delta_next_trip │
+│    varchar    │                    varchar                    │          double          │
+├───────────────┼───────────────────────────────────────────────┼──────────────────────────┤
+│ Unknown       │ NV                                            │        71.29739491538245 │
+│ Manhattan     │ East Village                                  │       110.36631030059868 │
+│ Brooklyn      │ Crown Heights North                           │       117.82040208710706 │
+│ Manhattan     │ Upper East Side North                         │       132.07260514885937 │
+│ Manhattan     │ Clinton East                                  │       144.68817560282884 │
+│ Brooklyn      │ East New York                                 │       148.68477887272883 │
+│ Manhattan     │ TriBeCa/Civic Center                          │       156.67401194693338 │
+│ Brooklyn      │ Bushwick South                                │       160.42794438150588 │
+│ Manhattan     │ Times Sq/Theatre District                     │       161.43022953449093 │
+│ Manhattan     │ Central Harlem North                          │       166.37752201619043 │
+│ Manhattan     │ Midtown South                                 │       168.07958269492678 │
+│ Manhattan     │ Lenox Hill West                               │       171.04991116792513 │
+│ Manhattan     │ West Chelsea/Hudson Yards                     │       181.07834361667966 │
+│ Manhattan     │ Midtown North                                 │       182.00896279431683 │
+│ Queens        │ Astoria                                       │       188.86527414362823 │
+│ Manhattan     │ Lower East Side                               │        190.3441819113348 │
+│ Manhattan     │ Lenox Hill East                               │        191.1878066869485 │
+│ Manhattan     │ East Harlem North                             │       194.02156536270974 │
+│ Manhattan     │ Upper West Side North                         │       199.20906642105993 │
+│ Manhattan     │ East Harlem South                             │       199.53842435501298 │
+│ Brooklyn      │ Bedford                                       │       199.75921181642786 │
+│ Brooklyn      │ Stuyvesant Heights                            │       201.43348121310314 │
+│ Manhattan     │ Yorkville West                                │       202.70347167171087 │
+│ Manhattan     │ Flatiron                                      │        203.8982770142662 │
+│ Manhattan     │ Washington Heights South                      │       205.41102355034167 │
+│ Brooklyn      │ Flatbush/Ditmas Park                          │        207.1975762665713 │
+│ Brooklyn      │ Park Slope                                    │         209.705113391108 │
+│ Brooklyn      │ Canarsie                                      │       213.41659542402607 │
+│ Brooklyn      │ Prospect-Lefferts Gardens                     │       216.16052433431446 │
+│ Manhattan     │ Kips Bay                                      │       221.81359313319192 │
+│ Manhattan     │ Central Harlem                                │       227.67566086639917 │
+│ Manhattan     │ Greenwich Village North                       │        239.0952478298562 │
+│ Brooklyn      │ Brownsville                                   │        239.6596225069063 │
+│ Brooklyn      │ Williamsburg (South Side)                     │       243.32975030532793 │
+│ Brooklyn      │ Bushwick North                                │        245.6755316459143 │
+│ Manhattan     │ Garment District                              │       247.57154281279034 │
+│ Manhattan     │ UN/Turtle Bay South                           │       253.72269849431956 │
+│ Queens        │ Elmhurst                                      │        256.4900138076673 │
+│ Brooklyn      │ East Williamsburg                             │       256.95052848273787 │
+│ Brooklyn      │ Greenpoint                                    │        257.6748658738092 │
+│ Manhattan     │ Greenwich Village South                       │       262.72231235128703 │
+│ Manhattan     │ Lincoln Square West                           │       268.34939707844353 │
+│ Manhattan     │ Clinton West                                  │       274.44469647590495 │
+│ Bronx         │ Mott Haven/Port Morris                        │       275.10433491013947 │
+│ Brooklyn      │ Fort Greene                                   │        277.6680442103597 │
+│ Queens        │ Long Island City/Hunters Point                │        284.2510869076016 │
+│ Queens        │ Jamaica                                       │        284.3303876108585 │
+│ Manhattan     │ Financial District North                      │        290.7461043056342 │
+│ Brooklyn      │ East Flatbush/Remsen Village                  │         291.825873405322 │
+│ Manhattan     │ SoHo                                          │        293.4201564721296 │
+│ Queens        │ Sunnyside                                     │       308.15957882821345 │
+│ Bronx         │ East Concourse/Concourse Village              │       308.40623580828674 │
+│ Manhattan     │ Meatpacking/West Village West                 │        309.5603012928825 │
+│ Queens        │ Ridgewood                                     │        309.8088344942608 │
+│ Manhattan     │ Washington Heights North                      │       311.21324424340077 │
+│ Queens        │ Forest Hills                                  │         311.238737051675 │
+│ Bronx         │ Soundview/Castle Hill                         │       312.53582209202204 │
+│ Brooklyn      │ Clinton Hill                                  │       315.99071896732875 │
+│ Bronx         │ Mount Hope                                    │        316.9489283330573 │
+│ Brooklyn      │ Flatlands                                     │       324.60899867394454 │
+│ Bronx         │ West Concourse                                │        328.9134096105073 │
+│ Queens        │ South Ozone Park                              │       336.50932679755977 │
+│ Bronx         │ Bedford Park                                  │        342.1584131060151 │
+│ Bronx         │ Williamsbridge/Olinville                      │       342.90546307456754 │
+│ Bronx         │ University Heights/Morris Heights             │        344.3638832092909 │
+│ Brooklyn      │ Ocean Hill                                    │         351.098328395048 │
+│ Brooklyn      │ Boerum Hill                                   │        354.9877413371554 │
+│ Manhattan     │ Morningside Heights                           │        356.0031227629124 │
+│ Brooklyn      │ Bay Ridge                                     │        356.1776824082742 │
+│ Bronx         │ Melrose South                                 │       359.60903034789044 │
+│ Brooklyn      │ East Flatbush/Farragut                        │       362.57086351998345 │
+│ Manhattan     │ Manhattan Valley                              │        366.1497553452994 │
+│ Brooklyn      │ Borough Park                                  │       366.68852259135826 │
+│ Manhattan     │ Two Bridges/Seward Park                       │       370.74066508174104 │
+│ Bronx         │ East Tremont                                  │        371.7242266220925 │
+│ Manhattan     │ Battery Park City                             │        383.2586292691215 │
+│ Queens        │ Steinway                                      │       385.70578032917035 │
+│ Brooklyn      │ Sunset Park West                              │       393.39388711023634 │
+│ Bronx         │ Norwood                                       │       404.29263593183884 │
+│ Bronx         │ Morrisania/Melrose                            │       406.07221572132136 │
+│ Brooklyn      │ Brooklyn Heights                              │       411.59378014128936 │
+│ Queens        │ Flushing                                      │       412.06173338900777 │
+│ Brooklyn      │ Downtown Brooklyn/MetroTech                   │        417.4013574869968 │
+│ Bronx         │ Van Nest/Morris Park                          │       425.16907780029214 │
+│ Bronx         │ Van Cortlandt Village                         │        429.5781719742624 │
+│ Queens        │ Saint Albans                                  │        429.8712786376445 │
+│ Manhattan     │ Central Park                                  │       433.50203176695084 │
+│ Queens        │ Richmond Hill                                 │       449.12690579133005 │
+│ Queens        │ Woodside                                      │         449.162981559053 │
+│ Bronx         │ Highbridge                                    │       453.32737817526686 │
+│ Brooklyn      │ Crown Heights South                           │        454.8990737139317 │
+│ Bronx         │ Claremont/Bathgate                            │        456.4292239092887 │
+│ Manhattan     │ Inwood                                        │        485.0846947318295 │
+│ Brooklyn      │ East New York/Pennsylvania Avenue             │        500.1604434765393 │
+│ Manhattan     │ World Trade Center                            │       505.17288433850587 │
+│ Manhattan     │ Alphabet City                                 │          513.56149980484 │
+│ Brooklyn      │ Erasmus                                       │        515.8918676076586 │
+│ Brooklyn      │ Cypress Hills                                 │        518.6920493089034 │
+│ Queens        │ Corona                                        │        521.4871316395703 │
+│ Manhattan     │ Hudson Sq                                     │        521.6153318852669 │
+│ Queens        │ Old Astoria                                   │        524.6690370173457 │
+│ Bronx         │ Hunts Point                                   │        527.7067085550997 │
+│ Bronx         │ Spuyten Duyvil/Kingsbridge                    │        530.4703248891278 │
+│ Bronx         │ Pelham Parkway                                │        536.8765864481413 │
+│ Queens        │ South Jamaica                                 │        539.8700260717186 │
+│ Brooklyn      │ Bensonhurst West                              │        547.4903689448316 │
+│ Brooklyn      │ Prospect Heights                              │        561.0918863214378 │
+│ Bronx         │ Woodlawn/Wakefield                            │        563.6484573713286 │
+│ Brooklyn      │ Sheepshead Bay                                │        563.7861045151845 │
+│ Queens        │ Woodhaven                                     │        564.5583713238581 │
+│ Bronx         │ Belmont                                       │        574.0254667078691 │
+│ Brooklyn      │ DUMBO/Vinegar Hill                            │        578.2572490638247 │
+│ Bronx         │ Schuylerville/Edgewater Park                  │         578.433218848743 │
+│ Brooklyn      │ Midwood                                       │        580.6772675033329 │
+│ Bronx         │ Kingsbridge Heights                           │        598.5667724968014 │
+│ Brooklyn      │ Marine Park/Mill Basin                        │         605.666161606475 │
+│ Bronx         │ Eastchester                                   │        610.5645398298531 │
+│ Brooklyn      │ Homecrest                                     │        612.6930151338767 │
+│ Bronx         │ West Farms/Bronx River                        │        621.3581027901303 │
+│ Bronx         │ Bronxdale                                     │        627.1832509086576 │
+│ Bronx         │ Soundview/Bruckner                            │        628.7333950543543 │
+│ Bronx         │ Crotona Park East                             │        650.6261537827592 │
+│ Bronx         │ Parkchester                                   │        659.6187114225736 │
+│ Manhattan     │ Manhattanville                                │        680.8524196069553 │
+│ Brooklyn      │ Coney Island                                  │        688.0203499139377 │
+│ Queens        │ Queens Village                                │        695.2489487241585 │
+│ Bronx         │ Longwood                                      │        706.6740402582435 │
+│ Brooklyn      │ Bensonhurst East                              │        711.8177801821297 │
+│ Queens        │ Long Island City/Queens Plaza                 │         715.815629604443 │
+│ Bronx         │ Fordham South                                 │        717.8688437013378 │
+│ Queens        │ Rego Park                                     │        730.4822397261066 │
+│ Queens        │ Maspeth                                       │        733.1928626986614 │
+│ Queens        │ North Corona                                  │         734.491103202847 │
+│ Queens        │ Glendale                                      │        769.0481594681149 │
+│ Queens        │ East Elmhurst                                 │        783.9422444904692 │
+│ Queens        │ JFK Airport                                   │        790.6197243630883 │
+│ Brooklyn      │ Madison                                       │        792.7377022430305 │
+│ Bronx         │ Allerton/Pelham Gardens                       │        796.9480086820454 │
+│ Brooklyn      │ Sunset Park East                              │         797.133924852646 │
+│ Staten Island │ Saint George/New Brighton                     │         798.741526709834 │
+│ Manhattan     │ Financial District South                      │        803.7135476317732 │
+│ Manhattan     │ Chinatown                                     │        813.8581093270792 │
+│ Brooklyn      │ Carroll Gardens                               │        815.8240757485726 │
+│ Manhattan     │ Stuy Town/Peter Cooper Village                │        830.2985472950766 │
+│ Queens        │ Briarwood/Jamaica Hills                       │        837.3100133900755 │
+│ Queens        │ Springfield Gardens North                     │        841.4488914943508 │
+│ Manhattan     │ Midtown Center                                │        848.9962085621925 │
+│ Brooklyn      │ Brighton Beach                                │        857.3499042938789 │
+│ Queens        │ Hillcrest/Pomonok                             │        860.0499645930929 │
+│ Manhattan     │ Seaport                                       │        861.7180865578781 │
+│ Manhattan     │ Bloomingdale                                  │        861.9935169514658 │
+│ Manhattan     │ Union Sq                                      │        884.8722303710094 │
+│ Manhattan     │ Murray Hill                                   │        897.7047862248836 │
+│ Queens        │ Kew Gardens                                   │        910.5984601632111 │
+│ Queens        │ LaGuardia Airport                             │        919.6670627269874 │
+│ Queens        │ Middle Village                                │         920.441369359916 │
+│ Brooklyn      │ Kensington                                    │        929.0441299774938 │
+│ Queens        │ Far Rockaway                                  │        937.5345574919098 │
+│ Queens        │ Springfield Gardens South                     │         942.221106652146 │
+│ Queens        │ Elmhurst/Maspeth                              │        948.3713848094422 │
+│ Brooklyn      │ Gowanus                                       │        980.1372214290149 │
+│ Queens        │ Murray Hill-Queens                            │        987.0734257537158 │
+│ Brooklyn      │ Red Hook                                      │        989.0938434793503 │
+│ Staten Island │ Stapleton                                     │       1016.3912483705361 │
+│ Manhattan     │ Midtown East                                  │       1017.3575899610644 │
+│ Queens        │ Laurelton                                     │       1022.9437488864774 │
+│ Manhattan     │ West Village                                  │        1040.821044005115 │
+│ Queens        │ Bayside                                       │       1045.6591556291391 │
+│ Queens        │ Hammels/Arverne                               │       1050.1708874440878 │
+│ Manhattan     │ Penn Station/Madison Sq West                  │       1056.6877690169724 │
+│ Queens        │ Rosedale                                      │       1064.5346132452341 │
+│ Manhattan     │ Gramercy                                      │        1103.041685376642 │
+│ Manhattan     │ Lincoln Square East                           │       1103.8827904473596 │
+│ Queens        │ Kew Gardens Hills                             │       1129.2255538271738 │
+│ Manhattan     │ Upper West Side South                         │       1129.9546119372974 │
+│ Bronx         │ Riverdale/North Riverdale/Fieldston           │        1156.436450531944 │
+│ Brooklyn      │ South Williamsburg                            │        1157.009617850731 │
+│ Brooklyn      │ Dyker Heights                                 │       1171.7669301272774 │
+│ Manhattan     │ Upper East Side South                         │       1174.4959111039725 │
+│ Queens        │ Ozone Park                                    │        1178.610849848841 │
+│ Queens        │ Jamaica Estates                               │       1242.7692353103232 │
+│ Brooklyn      │ Gravesend                                     │       1245.8833323469648 │
+│ Brooklyn      │ Starrett City                                 │       1298.2276716890378 │
+│ Manhattan     │ Sutton Place/Turtle Bay North                 │       1328.1459818566793 │
+│ Brooklyn      │ Cobble Hill                                   │        1335.276106306954 │
+│ Brooklyn      │ Windsor Terrace                               │       1350.3958262059527 │
+│ Staten Island │ Bloomfield/Emerson Hill                       │       1360.9667923715117 │
+│ Queens        │ College Point                                 │        1384.563520771676 │
+│ Staten Island │ Mariners Harbor                               │       1398.5192320467681 │
+│ Bronx         │ Pelham Bay                                    │        1406.229765536283 │
+│ Manhattan     │ East Chelsea                                  │       1418.8698435159572 │
+│ Brooklyn      │ Williamsburg (North Side)                     │       1424.6976325011026 │
+│ Queens        │ Whitestone                                    │       1443.6788277785397 │
+│ Queens        │ Howard Beach                                  │        1447.359321645468 │
+│ Queens        │ Queensboro Hill                               │       1489.0213849527267 │
+│ Queens        │ Hollis                                        │        1534.521612362417 │
+│ Queens        │ Jackson Heights                               │       1535.0354452266272 │
+│ Manhattan     │ Marble Hill                                   │       1541.7655445157825 │
+│ Manhattan     │ Little Italy/NoLiTa                           │       1621.3469081251137 │
+│ Brooklyn      │ Manhattan Beach                               │        1674.106984758118 │
+│ Brooklyn      │ Bath Beach                                    │       1676.6593660401402 │
+│ Queens        │ Cambria Heights                               │       1683.0803485769109 │
+│ Brooklyn      │ Ocean Parkway South                           │       1732.1070703746366 │
+│ Queens        │ East Flushing                                 │        1771.066545148626 │
+│ Staten Island │ Grymes Hill/Clifton                           │        1849.643696002343 │
+│ Staten Island │ Heartland Village/Todt Hill                   │       1914.2619119786616 │
+│ Manhattan     │ Yorkville East                                │        1955.415646196893 │
+│ Unknown       │ NA                                            │       2156.7220969945356 │
+│ Queens        │ Fresh Meadows                                 │       2208.0591300090914 │
+│ Manhattan     │ Hamilton Heights                              │       2261.6591219867228 │
+│ Queens        │ Auburndale                                    │       2306.9284435840304 │
+│ Brooklyn      │ Brooklyn Navy Yard                            │       2334.1908334873406 │
+│ Staten Island │ South Beach/Dongan Hills                      │       2349.3706707339757 │
+│ Staten Island │ West Brighton                                 │        2438.646922542281 │
+│ Queens        │ Glen Oaks                                     │       2550.3774986875583 │
+│ Queens        │ Bellerose                                     │       2589.7695493500637 │
+│ Staten Island │ Westerleigh                                   │       2604.0016081147946 │
+│ Queens        │ Bay Terrace/Fort Totten                       │       2752.5525432593818 │
+│ Staten Island │ Port Richmond                                 │        2796.692086267216 │
+│ Bronx         │ Van Cortlandt Park                            │       2884.6396565112136 │
+│ Queens        │ Oakland Gardens                               │        2987.084850778035 │
+│ Brooklyn      │ Prospect Park                                 │       3038.5386095742124 │
+│ Bronx         │ Co-Op City                                    │        3066.729804285095 │
+│ Queens        │ Rockaway Park                                 │       3107.4866407518575 │
+│ Staten Island │ Great Kills                                   │       3184.4112248499823 │
+│ Manhattan     │ Roosevelt Island                              │       3214.7768388903028 │
+│ Queens        │ Baisley Park                                  │       3434.1683451791946 │
+│ Staten Island │ New Dorp/Midland Beach                        │        3445.335624659029 │
+│ Staten Island │ Arrochar/Fort Wadsworth                       │       3447.4772640427973 │
+│ Queens        │ Douglaston                                    │       3558.7524088578352 │
+│ Brooklyn      │ Columbia Street                               │       3622.3988528821337 │
+│ Queens        │ Flushing Meadows-Corona Park                  │        3704.647365950956 │
+│ Bronx         │ Bronx Park                                    │        4037.157258837819 │
+│ Bronx         │ Westchester Village/Unionport                 │        4459.222142507745 │
+│ Staten Island │ Charleston/Tottenville                        │        4797.357110300821 │
+│ Staten Island │ Eltingville/Annadale/Prince's Bay             │         4827.98860943353 │
+│ Queens        │ Saint Michaels Cemetery/Woodside              │        5435.846518033916 │
+│ Staten Island │ Oakwood                                       │       5769.7636579572445 │
+│ Bronx         │ Country Club                                  │        6095.816005405927 │
+│ Manhattan     │ Inwood Hill Park                              │       7057.0474007825605 │
+│ Staten Island │ Arden Heights                                 │         7111.18536036036 │
+│ Queens        │ Queensbridge/Ravenswood                       │        7478.563495825281 │
+│ Bronx         │ Pelham Bay Park                               │        7945.640402769037 │
+│ Bronx         │ City Island                                   │        8146.659055727554 │
+│ Staten Island │ Rossville/Woodrow                             │        8202.717625665671 │
+│ Bronx         │ Crotona Park                                  │       10803.681094952952 │
+│ Queens        │ Forest Park/Highland Park                     │       12514.075351973032 │
+│ Manhattan     │ Battery Park                                  │       12925.503175578775 │
+│ Manhattan     │ Randalls Island                               │       13526.170987786587 │
+│ Brooklyn      │ Marine Park/Floyd Bennett Field               │        17549.87183764248 │
+│ Manhattan     │ Highbridge Park                               │       17729.852891633913 │
+│ Queens        │ Breezy Point/Fort Tilden/Riis Beach           │       19239.147820786347 │
+│ Queens        │ Willets Point                                 │        28457.02938517179 │
+│ EWR           │ Newark Airport                                │       31959.922881785897 │
+│ Queens        │ Broad Channel                                 │         39688.8717787555 │
+│ Brooklyn      │ Green-Wood Cemetery                           │        40757.56939961265 │
+│ Queens        │ Astoria Park                                  │       45214.720430107525 │
+│ Staten Island │ Freshkills Park                               │        80408.22420382165 │
+│ Queens        │ Jamaica Bay                                   │        773118.8441558442 │
+│ Staten Island │ Great Kills Park                              │       1006255.5483870967 │
+│ Manhattan     │ Governor's Island/Ellis Island/Liberty Island │       4180347.6428571427 │
+│ Bronx         │ Rikers Island                                 │        4278366.285714285 │
+├───────────────┴───────────────────────────────────────────────┴──────────────────────────┤
+│ 262 rows                                                                       3 columns │
+└──────────────────────────────────────────────────────────────────────────────────────────┘
